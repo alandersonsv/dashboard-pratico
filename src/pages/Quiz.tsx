@@ -15,43 +15,44 @@ const Quiz: React.FC = () => {
   const steps = [
     {
       step: 1,
-      title: t('quiz.step1.title'),
+      title: "🤔 Qual melhor descreve você?",
       options: [
-        t('quiz.step1.option1'),
-        t('quiz.step1.option2'),
-        t('quiz.step1.option3'),
-        t('quiz.step1.option4')
+        "🎯 Gestor de Tráfego",
+        "🧑‍💼 Dono de Agência", 
+        "🏪 Dono de Negócio",
+        "🎥 Infoprodutor"
       ]
     },
     {
       step: 2,
-      title: t('quiz.step2.title'),
+      title: "📊 Como você apresenta os resultados das campanhas?",
+      subtitle: "Seja 100% sincero!",
       options: [
-        t('quiz.step2.option1'),
-        t('quiz.step2.option2'),
-        t('quiz.step2.option3'),
-        t('quiz.step2.option4')
+        "📸 Prints do Gerenciador de Anúncios",
+        "📲 Mensagem no WhatsApp",
+        "📝 Faço no Excel/Sheets/Canva",
+        "💸 Uso ferramenta paga de relatórios",
+        "📈 Tenho Dashboard no Looker Studio"
       ]
     },
     {
       step: 3,
-      title: t('quiz.step3.title'),
-      subtitle: t('quiz.step3.subtitle'),
+      title: "🎯 Qual seu foco principal nas campanhas?",
       options: [
-        t('quiz.step3.option1'),
-        t('quiz.step3.option2'),
-        t('quiz.step3.option3'),
-        t('quiz.step3.option4')
+        "🧲 Gerar mais Leads",
+        "💰 Aumentar Vendas",
+        "📈 Melhorar Resultados",
+        "🤩 Impressionar Clientes"
       ]
     },
     {
       step: 4,
-      title: t('quiz.step4.title'),
+      title: "⚙️ Quais plataformas você usa hoje?",
       options: [
-        t('quiz.step4.option1'),
-        t('quiz.step4.option2'),
-        t('quiz.step4.option3'),
-        t('quiz.step4.option4')
+        "📱 Meta Ads (Facebook e Instagram)",
+        "🔍 Google Ads",
+        "📊 Google Analytics",
+        "✅ Uso todas essas"
       ]
     }
   ];

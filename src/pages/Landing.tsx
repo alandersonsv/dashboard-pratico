@@ -52,9 +52,14 @@ const Landing: React.FC = () => {
             onClick={() => navigate('/quiz')}
             className="btn-gradient text-lg px-12 py-6 inline-flex items-center space-x-3 animate-pulse-soft"
           >
-            <span>{t('landing.cta')}</span>
+            <span>🚀 Quero ganhar tempo no meu dia</span>
             <ArrowRight className="w-6 h-6" />
           </button>
+          
+          {/* Microcopy */}
+          <p className="text-center text-sm text-muted-foreground mt-3">
+            🕒 Leva menos de 5 minutos
+          </p>
           
           {/* Trust Indicators */}
           <div className="mt-16 text-center">
@@ -69,35 +74,44 @@ const Landing: React.FC = () => {
         </div>
       </section>
 
-      {/* Features Preview Section */}
+      {/* Dashboard Gallery Section */}
       <section className="container mx-auto px-4 py-16">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-foreground mb-4">
-            Dashboards Profissionais, Resultados Imediatos
-          </h2>
+          <h3 className="text-3xl font-bold text-center text-foreground mb-4">
+            Explore os Dashboards em Ação
+          </h3>
           <p className="text-lg text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-            Visualize seus dados de forma profissional e tome decisões mais assertivas
+            Arraste para o lado e veja como relatórios automatizados podem economizar horas do seu dia.
           </p>
           
-          {/* Mock Dashboard Preview */}
-          <div className="bg-gradient-card rounded-3xl p-8 shadow-large animate-float">
-            <div className="bg-card rounded-xl p-6 border border-border/50">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-semibold text-foreground">Dashboard Meta Ads</h3>
-                <BarChart3 className="w-6 h-6 text-primary" />
+          {/* Horizontal Gallery */}
+          <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory">
+            <div className="flex-shrink-0 w-80 md:w-96 snap-start">
+              <div className="card-elevated h-64 bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="text-4xl mb-4">📱</div>
+                  <h4 className="font-semibold text-lg mb-2">Meta Ads Dashboard</h4>
+                  <p className="text-sm text-muted-foreground">ROI, audiências e métricas de performance</p>
+                </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-muted/50 rounded-lg p-4">
-                  <div className="text-2xl font-bold text-primary mb-1">47.2K</div>
-                  <div className="text-sm text-muted-foreground">Impressões</div>
+            </div>
+            
+            <div className="flex-shrink-0 w-80 md:w-96 snap-start">
+              <div className="card-elevated h-64 bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="text-4xl mb-4">🔍</div>
+                  <h4 className="font-semibold text-lg mb-2">Google Ads Dashboard</h4>
+                  <p className="text-sm text-muted-foreground">Palavras-chave, quality score e conversões</p>
                 </div>
-                <div className="bg-muted/50 rounded-lg p-4">
-                  <div className="text-2xl font-bold text-success mb-1">3.8%</div>
-                  <div className="text-sm text-muted-foreground">CTR</div>
-                </div>
-                <div className="bg-muted/50 rounded-lg p-4">
-                  <div className="text-2xl font-bold text-accent-cyan mb-1">R$ 2.45</div>
-                  <div className="text-sm text-muted-foreground">CPC</div>
+              </div>
+            </div>
+            
+            <div className="flex-shrink-0 w-80 md:w-96 snap-start">
+              <div className="card-elevated h-64 bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="text-4xl mb-4">📊</div>
+                  <h4 className="font-semibold text-lg mb-2">Google Analytics Dashboard</h4>
+                  <p className="text-sm text-muted-foreground">Comportamento do usuário e funis de conversão</p>
                 </div>
               </div>
             </div>

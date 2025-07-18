@@ -66,32 +66,73 @@ const Solution: React.FC = () => {
             </p>
           </div>
 
-          {/* Selected Dashboards */}
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
-            {dashboards.map((dashboard, index) => (
-              <div key={index} className="card-elevated animate-slide-up" style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className="text-center mb-4">
-                  <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <TrendingUp className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground mb-2">
-                    {dashboard.name}
-                  </h3>
-                  <p className="text-muted-foreground text-sm mb-4">
-                    {dashboard.description}
-                  </p>
-                </div>
-                
-                <div className="space-y-2">
-                  {dashboard.features.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-center space-x-2">
-                      <CheckCircle className="w-4 h-4 text-success flex-shrink-0" />
-                      <span className="text-sm text-foreground">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+          {/* Dashboard Cards */}
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            <div className="card-elevated text-center animate-slide-up">
+              <div className="text-4xl mb-4">📱</div>
+              <h3 className="text-xl font-semibold mb-3 text-gradient">Meta Ads</h3>
+              <p className="text-muted-foreground mb-4">
+                📱 Relatórios completos de Facebook e Instagram
+              </p>
+              <ul className="text-left text-sm space-y-2">
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
+                  • ROI em tempo real
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
+                  • Análise de público
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
+                  • Otimização contínua
+                </li>
+              </ul>
+            </div>
+
+            <div className="card-elevated text-center animate-slide-up" style={{animationDelay: '0.1s'}}>
+              <div className="text-4xl mb-4">🔍</div>
+              <h3 className="text-xl font-semibold mb-3 text-gradient">Google Ads</h3>
+              <p className="text-muted-foreground mb-4">
+                🔍 Performance avançada das campanhas
+              </p>
+              <ul className="text-left text-sm space-y-2">
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
+                  • Quality Score
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
+                  • Palavras-chave de topo
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
+                  • Conversões por dispositivo
+                </li>
+              </ul>
+            </div>
+
+            <div className="card-elevated text-center animate-slide-up" style={{animationDelay: '0.2s'}}>
+              <div className="text-4xl mb-4">📊</div>
+              <h3 className="text-xl font-semibold mb-3 text-gradient">Google Analytics</h3>
+              <p className="text-muted-foreground mb-4">
+                📊 Comportamento completo dos usuários
+              </p>
+              <ul className="text-left text-sm space-y-2">
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
+                  • Funil de conversão
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
+                  • Segmentação avançada
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
+                  • Metas personalizadas
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* Social Proof */}

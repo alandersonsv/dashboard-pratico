@@ -12,19 +12,19 @@
     --background: 0 0% 97%;
     --foreground: 217 33% 12%;
 
-    /* Brand primary - vibrant blue */
-    --primary: 223 100% 50%;
+    /* Brand primary - vibrant orange */
+    --primary: 24 100% 50%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 223 100% 45%;
+    --primary-hover: 24 100% 45%;
     
     /* Brand secondary - dark for contrast */
     --secondary: 217 33% 12%;
     --secondary-foreground: 0 0% 100%;
     
     /* Accent colors for gradients */
-    --accent-cyan: 185 96% 53%;
-    --accent-blue: 223 100% 50%;
-    --accent-purple: 263 85% 70%;
+    --accent-orange-light: 21 100% 63%;
+    --accent-orange: 24 100% 50%;
+    --accent-orange-dark: 24 100% 45%;
     
     /* Neutral grays */
     --muted: 220 13% 95%;
@@ -48,9 +48,9 @@
     --card-foreground: 217 33% 12%;
     
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent-cyan)));
-    --gradient-secondary: linear-gradient(135deg, hsl(var(--accent-blue)), hsl(var(--accent-purple)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent-cyan)) 100%);
+    --gradient-primary: linear-gradient(90deg, hsl(var(--accent-orange-light)), hsl(var(--accent-orange)));
+    --gradient-secondary: linear-gradient(90deg, hsl(var(--accent-orange)), hsl(var(--accent-orange-dark)));
+    --gradient-hero: linear-gradient(90deg, hsl(var(--accent-orange-light)) 0%, hsl(var(--accent-orange)) 100%);
     --gradient-card: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
     
     /* Shadows */
