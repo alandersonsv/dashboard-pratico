@@ -43,7 +43,7 @@ const Quiz: React.FC = () => {
         "📲 Envio pelo WhatsApp",
         "📝 Faço manualmente no Excel ou Canva",
         "💸 Uso uma ferramenta por assinatura",
-        "📊 Tenho um dashboard no Looker Studio"
+        "📊 Tenho um dashboard no Looker Studio ou Power BI"
       ]
     },
     {

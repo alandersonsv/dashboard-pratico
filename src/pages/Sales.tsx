@@ -51,7 +51,7 @@ const Sales: React.FC = () => {
                   Sou especialista em marketing com foco em dados e performance.
                 </p>
                 <p className="text-muted-foreground leading-relaxed mt-4">
-                  Nos últimos 4 anos, ajudei negócios de diferentes segmentos a tomar decisões mais inteligentes com base em dados reais, integrando campanhas de tráfego, CRM e inteligência digital. Já gerenciei anúncios que movimentaram múltiplos 6 dígitos em investimentos, convertendo em resultados sólidos para agências, infoprodutores e empresas.
+                  Nos últimos 4 anos, ajudei negócios de diferentes segmentos a tomar decisões mais inteligentes com base em dados reais.
                 </p>
                 <p className="text-muted-foreground leading-relaxed mt-4">
                   Fui responsável por implementar estruturas completas de tracking, automações, relatórios estratégicos e dashboards que simplificam o acompanhamento de resultados e aumentam a credibilidade de quem vende serviços de tráfego.
