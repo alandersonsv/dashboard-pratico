@@ -3,14 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useQuiz } from '@/contexts/QuizContext';
 import { ArrowRight, Check, X } from 'lucide-react';
-
 const Sales: React.FC = () => {
-  const { t } = useLanguage();
+  const {
+    t
+  } = useLanguage();
   const navigate = useNavigate();
-  const { addAnswer } = useQuiz();
+  const {
+    addAnswer
+  } = useQuiz();
   const [selectedGoal, setSelectedGoal] = useState<string>('');
   const [finalChoice, setFinalChoice] = useState<string>('');
-
   const handleGoalSelect = (goal: string) => {
     setSelectedGoal(goal);
     addAnswer({
@@ -19,7 +21,6 @@ const Sales: React.FC = () => {
       answer: goal
     });
   };
-
   const handleFinalChoice = (choice: string) => {
     setFinalChoice(choice);
     addAnswer({
@@ -27,14 +28,11 @@ const Sales: React.FC = () => {
       question: 'Avaliação final',
       answer: choice
     });
-
     if (choice.includes('Gostei')) {
       navigate('/offer');
     }
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-accent-cyan/5 to-background">
+  return <div className="min-h-screen bg-gradient-to-br from-primary/5 via-accent-cyan/5 to-background">
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           {/* Seção de Apresentação Pessoal */}
@@ -53,9 +51,7 @@ const Sales: React.FC = () => {
                 <p className="text-muted-foreground leading-relaxed mt-4">
                   Nos últimos 4 anos, ajudei negócios de diferentes segmentos a tomar decisões mais inteligentes com base em dados reais.
                 </p>
-                <p className="text-muted-foreground leading-relaxed mt-4">
-                  Fui responsável por implementar estruturas completas de tracking, automações, relatórios estratégicos e dashboards que simplificam o acompanhamento de resultados e aumentam a credibilidade de quem vende serviços de tráfego.
-                </p>
+                <p className="text-muted-foreground leading-relaxed mt-4">Fui responsável por implementar estruturas completas de tracking, automações, relatórios estratégicos e dashboards que simplificam o acompanhamento de resultados e agilizam seu tempo com tomada de dicisões agéis. </p>
                 <p className="text-muted-foreground leading-relaxed mt-4">
                   Com essa bagagem, criei uma solução prática e definitiva para quem trabalha com anúncios e precisa apresentar resultados de forma clara, visual e profissional.
                 </p>
@@ -124,42 +120,21 @@ const Sales: React.FC = () => {
             </div>
 
             <div className="grid gap-4 mb-8">
-              {[
-                "📲 Geração de Leads (Mensagens)",
-                "💲 Conversões (Vendas)",
-                "🚀 Ambos: Leads e Vendas"
-              ].map((goal, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleGoalSelect(goal)}
-                  className={`w-full p-6 rounded-xl border-2 transition-base text-left ${
-                    selectedGoal === goal
-                      ? 'border-primary bg-primary/10 shadow-button'
-                      : 'border-border hover:border-primary/50 bg-card hover:bg-muted/50'
-                  }`}
-                >
+              {["📲 Geração de Leads (Mensagens)", "💲 Conversões (Vendas)", "🚀 Ambos: Leads e Vendas"].map((goal, index) => <button key={index} onClick={() => handleGoalSelect(goal)} className={`w-full p-6 rounded-xl border-2 transition-base text-left ${selectedGoal === goal ? 'border-primary bg-primary/10 shadow-button' : 'border-border hover:border-primary/50 bg-card hover:bg-muted/50'}`}>
                   <div className="flex items-center space-x-4">
-                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                      selectedGoal === goal
-                        ? 'border-primary bg-primary'
-                        : 'border-border'
-                    }`}>
-                      {selectedGoal === goal && (
-                        <div className="w-3 h-3 bg-white rounded-full"></div>
-                      )}
+                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${selectedGoal === goal ? 'border-primary bg-primary' : 'border-border'}`}>
+                      {selectedGoal === goal && <div className="w-3 h-3 bg-white rounded-full"></div>}
                     </div>
                     <span className="text-lg font-medium text-foreground">
                       {goal}
                     </span>
                   </div>
-                </button>
-              ))}
+                </button>)}
             </div>
           </div>
 
           {/* Seção de Oferta e Recursos */}
-          {selectedGoal && (
-            <div className="card-elevated mb-12 animate-fade-in">
+          {selectedGoal && <div className="card-elevated mb-12 animate-fade-in">
               <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold text-foreground mb-4">
                   Seu dashboard ideal está pronto!
@@ -213,12 +188,10 @@ const Sales: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            </div>}
 
           {/* Seção de Validação Final */}
-          {selectedGoal && (
-            <div className="card-elevated animate-fade-in">
+          {selectedGoal && <div className="card-elevated animate-fade-in">
               <div className="text-center mb-8">
                 <h2 className="text-2xl font-bold text-foreground mb-4">
                   O que você achou?
@@ -226,36 +199,18 @@ const Sales: React.FC = () => {
               </div>
 
               <div className="grid gap-4">
-                {[
-                  "👏 Gostei! É tudo que eu preciso",
-                  "😓 Parece bom, mas ainda estou em dúvida"
-                ].map((choice, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleFinalChoice(choice)}
-                    className={`w-full p-6 rounded-xl border-2 transition-base text-left ${
-                      finalChoice === choice
-                        ? 'border-primary bg-primary/10 shadow-button'
-                        : 'border-border hover:border-primary/50 bg-card hover:bg-muted/50'
-                    } ${choice.includes('Gostei') ? 'bg-gradient-primary text-white hover:scale-105' : ''}`}
-                  >
+                {["👏 Gostei! É tudo que eu preciso", "😓 Parece bom, mas ainda estou em dúvida"].map((choice, index) => <button key={index} onClick={() => handleFinalChoice(choice)} className={`w-full p-6 rounded-xl border-2 transition-base text-left ${finalChoice === choice ? 'border-primary bg-primary/10 shadow-button' : 'border-border hover:border-primary/50 bg-card hover:bg-muted/50'} ${choice.includes('Gostei') ? 'bg-gradient-primary text-white hover:scale-105' : ''}`}>
                     <div className="flex items-center justify-between">
                       <span className={`text-lg font-medium ${choice.includes('Gostei') ? 'text-white' : 'text-foreground'}`}>
                         {choice}
                       </span>
-                      {choice.includes('Gostei') && (
-                        <ArrowRight className="w-5 h-5 text-white" />
-                      )}
+                      {choice.includes('Gostei') && <ArrowRight className="w-5 h-5 text-white" />}
                     </div>
-                  </button>
-                ))}
+                  </button>)}
               </div>
-            </div>
-          )}
+            </div>}
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Sales;
