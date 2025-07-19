@@ -1,63 +1,132 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useQuiz } from '@/contexts/QuizContext';
 import ProgressBar from '@/components/ProgressBar';
-import { ArrowRight, ArrowLeft, Loader2 } from 'lucide-react';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
 
 const Quiz: React.FC = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const { currentStep, setCurrentStep, addAnswer, generateProfile } = useQuiz();
+  const { 
+    currentStep, 
+    setCurrentStep, 
+    addAnswer, 
+    generateProfile, 
+    userProfile,
+    quizPath,
+    setQuizPath
+  } = useQuiz();
   const [selectedAnswer, setSelectedAnswer] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const steps = [
+  // Segmentação inicial
+  const initialStep = {
+    title: "Vamos te direcionar para a solução perfeita!",
+    subtitle: "Escolha a opção que melhor te representa:",
+    options: [
+      "📊 Gestor de Tráfego",
+      "🌐 Dono de Agência", 
+      "💼 Dono de Negócio",
+      "🚀 Infoprodutor"
+    ]
+  };
+
+  // Caminho 1: Gestor de Tráfego / Dono de Agência
+  const path1Steps = [
     {
       step: 1,
-      title: "🤔 Qual melhor descreve você?",
+      title: "Como você apresenta os resultados das campanhas para seus clientes?",
+      subtitle: "Seja 100% sincero:",
       options: [
-        "🎯 Gestor de Tráfego",
-        "🧑‍💼 Dono de Agência", 
-        "🏪 Dono de Negócio",
-        "🎥 Infoprodutor"
+        "📸 Tiro print do gerenciador",
+        "📲 Envio pelo WhatsApp",
+        "📝 Faço manualmente no Excel ou Canva",
+        "💸 Uso uma ferramenta por assinatura",
+        "📊 Tenho um dashboard no Looker Studio"
       ]
     },
     {
       step: 2,
-      title: "📊 Como você apresenta os resultados das campanhas?",
-      subtitle: "Seja 100% sincero!",
+      title: "O que você acha que realmente aumenta o valor do seu serviço?",
       options: [
-        "📸 Prints do Gerenciador de Anúncios",
-        "📲 Mensagem no WhatsApp",
-        "📝 Faço no Excel/Sheets/Canva",
-        "💸 Uso ferramenta paga de relatórios",
-        "📈 Tenho Dashboard no Looker Studio"
+        "💡 Só prospectar clientes mais caros",
+        "🗃️ Só adicionar novos serviços no pacote",
+        "🚀 Combinar tudo e aumentar sua CREDIBILIDADE com relatórios profissionais"
       ]
     },
     {
       step: 3,
-      title: "🎯 Qual seu foco principal nas campanhas?",
+      title: "Você conhece os Relatórios de Tráfego Automáticos?",
+      subtitle: "Dashboards que atualizam sozinhos, sem limite de contas e sem assinatura mensal. Feitos para quem quer escalar com mais credibilidade e menos esforço.",
       options: [
-        "🧲 Gerar mais Leads",
-        "💰 Aumentar Vendas",
-        "📈 Melhorar Resultados",
-        "🤩 Impressionar Clientes"
+        "🤯 Quero conhecer agora",
+        "😏 Já conheço",
+        "😎 Já uso!"
       ]
     },
     {
       step: 4,
-      title: "⚙️ Quais plataformas você usa hoje?",
+      title: "Concorda que relatórios automáticos aumentam a percepção de valor do seu serviço?",
+      subtitle: "Eles mostram profissionalismo, otimizam sua entrega e ajudam a fechar contratos maiores.",
       options: [
-        "📱 Meta Ads (Facebook e Instagram)",
-        "🔍 Google Ads",
-        "📊 Google Analytics",
-        "✅ Uso todas essas"
+        "👏 Concordo!",
+        "🙅 Discordo"
       ]
     }
   ];
 
-  const currentStepData = steps[currentStep - 1];
+  // Caminho 2: Dono de Negócio / Infoprodutor
+  const path2Steps = [
+    {
+      step: 1,
+      title: "Como você analisa o desempenho geral das suas campanhas?",
+      options: [
+        "💻 No próprio Gerenciador de Anúncios",
+        "💸 Uso uma ferramenta por assinatura",
+        "📊 Tenho um dashboard automático (Looker ou Power BI)"
+      ]
+    },
+    {
+      step: 2,
+      title: "Você já conhece os Relatórios de Tráfego Automáticos?",
+      subtitle: "Feitos no Looker Studio, são dashboards prontos e atualizados em tempo real. Sem limite de contas, sem mensalidade, e com tudo pronto para você focar no que importa: vender mais.",
+      options: [
+        "🤯 Quero conhecer agora",
+        "😏 Já conheço", 
+        "😎 Já uso!"
+      ]
+    },
+    {
+      step: 3,
+      title: "Concorda que analisar as métricas com clareza ajuda a tomar melhores decisões de tráfego?",
+      subtitle: "Um bom relatório mostra onde ajustar, o que está dando certo, e como escalar.",
+      options: [
+        "👏 Concordo!",
+        "🙅 Discordo"
+      ]
+    }
+  ];
+
+  const getCurrentStepData = () => {
+    if (quizPath === 'initial') {
+      return initialStep;
+    } else if (quizPath === 'path1') {
+      return path1Steps[currentStep - 1];
+    } else if (quizPath === 'path2') {
+      return path2Steps[currentStep - 1];
+    }
+    return null;
+  };
+
+  const getTotalSteps = () => {
+    if (quizPath === 'initial') return 1;
+    if (quizPath === 'path1') return 4;
+    if (quizPath === 'path2') return 3;
+    return 1;
+  };
+
+  const currentStepData = getCurrentStepData();
 
   const handleOptionSelect = (option: string) => {
     setSelectedAnswer(option);
@@ -66,22 +135,46 @@ const Quiz: React.FC = () => {
   const handleNext = async () => {
     if (!selectedAnswer) return;
 
-    // Save answer
+    if (quizPath === 'initial') {
+      // Segmentação inicial
+      addAnswer({
+        step: 0,
+        question: initialStep.title,
+        answer: selectedAnswer
+      });
+
+      generateProfile();
+      
+      // Definir caminho baseado na resposta
+      if (selectedAnswer.includes('Tráfego') || selectedAnswer.includes('Agência')) {
+        setQuizPath('path1');
+        setCurrentStep(1);
+      } else {
+        setQuizPath('path2');
+        setCurrentStep(1);
+      }
+      
+      setSelectedAnswer('');
+      return;
+    }
+
+    // Salvar resposta atual
     addAnswer({
       step: currentStep,
-      question: currentStepData.title,
+      question: currentStepData?.title || '',
       answer: selectedAnswer
     });
 
-    if (currentStep === 4) {
-      // Show loading screen
+    // Verificar se é o último passo do caminho atual
+    const totalSteps = getTotalSteps();
+    if (currentStep === totalSteps) {
+      // Mostrar loading e navegar para página de vendas
       setIsLoading(true);
       
-      // Simulate analysis time
       setTimeout(() => {
-        generateProfile();
-        navigate('/solution');
-      }, 3000);
+        setQuizPath('final');
+        navigate('/sales');
+      }, 2000);
     } else {
       setCurrentStep(currentStep + 1);
       setSelectedAnswer('');
@@ -89,7 +182,14 @@ const Quiz: React.FC = () => {
   };
 
   const handlePrevious = () => {
-    if (currentStep > 1) {
+    if (quizPath === 'initial') return;
+    
+    if (currentStep === 1) {
+      // Voltar para segmentação inicial
+      setQuizPath('initial');
+      setCurrentStep(1);
+      setSelectedAnswer('');
+    } else {
       setCurrentStep(currentStep - 1);
       setSelectedAnswer('');
     }
@@ -101,8 +201,11 @@ const Quiz: React.FC = () => {
         <div className="text-center max-w-md mx-auto px-4">
           <div className="animate-spin w-16 h-16 border-4 border-primary border-t-transparent rounded-full mx-auto mb-8"></div>
           <h2 className="text-2xl font-bold text-foreground mb-4">
-            {t('quiz.loading')}
+            Analisando suas respostas...
           </h2>
+          <p className="text-muted-foreground mb-6">
+            Preparando sua solução personalizada
+          </p>
           <div className="w-full bg-muted rounded-full h-2">
             <div className="bg-gradient-primary h-2 rounded-full animate-pulse" style={{ width: '100%' }}></div>
           </div>
@@ -111,12 +214,21 @@ const Quiz: React.FC = () => {
     );
   }
 
+  if (!currentStepData) {
+    return <div>Erro: Dados do passo não encontrados</div>;
+  }
+
+  const currentStepForDisplay = quizPath === 'initial' ? 1 : currentStep;
+  const totalStepsForDisplay = quizPath === 'initial' ? 1 : getTotalSteps();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-accent-cyan/5 to-background">
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto">
           {/* Progress Bar */}
-          <ProgressBar current={currentStep} total={4} className="mb-12" />
+          {quizPath !== 'initial' && (
+            <ProgressBar current={currentStepForDisplay} total={totalStepsForDisplay} className="mb-12" />
+          )}
 
           {/* Question Card */}
           <div className="card-elevated animate-slide-up">
@@ -165,15 +277,15 @@ const Quiz: React.FC = () => {
             <div className="flex items-center justify-between">
               <button
                 onClick={handlePrevious}
-                disabled={currentStep === 1}
+                disabled={quizPath === 'initial'}
                 className={`flex items-center space-x-2 px-6 py-3 rounded-lg transition-base ${
-                  currentStep === 1
+                  quizPath === 'initial'
                     ? 'text-muted-foreground cursor-not-allowed'
                     : 'text-foreground hover:bg-muted'
                 }`}
               >
                 <ArrowLeft className="w-5 h-5" />
-                <span>{t('quiz.previous')}</span>
+                <span>Anterior</span>
               </button>
 
               <button
@@ -185,7 +297,10 @@ const Quiz: React.FC = () => {
                     : 'bg-muted text-muted-foreground cursor-not-allowed'
                 }`}
               >
-                <span>{currentStep === 4 ? 'Finalizar' : t('quiz.next')}</span>
+                <span>
+                  {quizPath === 'initial' ? 'Começar' : 
+                   (currentStep === getTotalSteps() ? 'Finalizar' : 'Próximo')}
+                </span>
                 <ArrowRight className="w-5 h-5" />
               </button>
             </div>

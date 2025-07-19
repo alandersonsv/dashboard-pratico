@@ -8,9 +8,10 @@ export interface QuizAnswer {
 
 export interface UserProfile {
   type: 'traffic-manager' | 'agency-owner' | 'entrepreneur' | 'infoproducer';
-  currentMethod: 'screenshots' | 'spreadsheets' | 'expensive-tools' | 'looker-studio';
-  goal: 'leads' | 'sales' | 'results' | 'impress-clients';
-  platforms: 'meta-ads' | 'google-ads' | 'tiktok-ads' | 'all-platforms';
+  path: 'path1' | 'path2';
+  currentMethod: string;
+  goal: string;
+  finalGoal?: string;
 }
 
 interface QuizContextType {
@@ -22,6 +23,8 @@ interface QuizContextType {
   generateProfile: () => void;
   resetQuiz: () => void;
   isCompleted: boolean;
+  quizPath: 'initial' | 'path1' | 'path2' | 'final';
+  setQuizPath: (path: 'initial' | 'path1' | 'path2' | 'final') => void;
 }
 
 const QuizContext = createContext<QuizContextType | undefined>(undefined);
@@ -31,6 +34,7 @@ export const QuizProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [answers, setAnswers] = useState<QuizAnswer[]>([]);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [quizPath, setQuizPath] = useState<'initial' | 'path1' | 'path2' | 'final'>('initial');
 
   const addAnswer = (answer: QuizAnswer) => {
     setAnswers(prev => {
@@ -40,58 +44,34 @@ export const QuizProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const generateProfile = () => {
-    if (answers.length === 4) {
-      const step1Answer = answers.find(a => a.step === 1)?.answer;
-      const step2Answer = answers.find(a => a.step === 2)?.answer;
-      const step3Answer = answers.find(a => a.step === 3)?.answer;
-      const step4Answer = answers.find(a => a.step === 4)?.answer;
-
-      // Map answers to profile type
+    const initialAnswer = answers.find(a => a.step === 0)?.answer;
+    
+    if (initialAnswer) {
       let type: UserProfile['type'] = 'entrepreneur';
-      if (step1Answer?.includes('Tráfego') || step1Answer?.includes('Traffic')) {
+      let path: 'path1' | 'path2' = 'path2';
+
+      if (initialAnswer.includes('Tráfego')) {
         type = 'traffic-manager';
-      } else if (step1Answer?.includes('Agência') || step1Answer?.includes('Agency')) {
+        path = 'path1';
+      } else if (initialAnswer.includes('Agência')) {
         type = 'agency-owner';
-      } else if (step1Answer?.includes('Infoprodutor') || step1Answer?.includes('Infoproducer')) {
+        path = 'path1';
+      } else if (initialAnswer.includes('Negócio')) {
+        type = 'entrepreneur';
+        path = 'path2';
+      } else if (initialAnswer.includes('Infoprodutor')) {
         type = 'infoproducer';
-      }
-
-      let currentMethod: UserProfile['currentMethod'] = 'spreadsheets';
-      if (step2Answer?.includes('Print') || step2Answer?.includes('Screenshot')) {
-        currentMethod = 'screenshots';
-      } else if (step2Answer?.includes('caras') || step2Answer?.includes('Expensive')) {
-        currentMethod = 'expensive-tools';
-      } else if (step2Answer?.includes('Looker')) {
-        currentMethod = 'looker-studio';
-      }
-
-      let goal: UserProfile['goal'] = 'results';
-      if (step3Answer?.includes('leads')) {
-        goal = 'leads';
-      } else if (step3Answer?.includes('vendas') || step3Answer?.includes('sales')) {
-        goal = 'sales';
-      } else if (step3Answer?.includes('clientes') || step3Answer?.includes('clients')) {
-        goal = 'impress-clients';
-      }
-
-      let platforms: UserProfile['platforms'] = 'all-platforms';
-      if (step4Answer?.includes('Meta')) {
-        platforms = 'meta-ads';
-      } else if (step4Answer?.includes('Google')) {
-        platforms = 'google-ads';
-      } else if (step4Answer?.includes('TikTok')) {
-        platforms = 'tiktok-ads';
+        path = 'path2';
       }
 
       const profile: UserProfile = {
         type,
-        currentMethod,
-        goal,
-        platforms
+        path,
+        currentMethod: '',
+        goal: ''
       };
 
       setUserProfile(profile);
-      setIsCompleted(true);
     }
   };
 
@@ -100,6 +80,7 @@ export const QuizProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setAnswers([]);
     setUserProfile(null);
     setIsCompleted(false);
+    setQuizPath('initial');
   };
 
   const value = {
@@ -110,7 +91,9 @@ export const QuizProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     userProfile,
     generateProfile,
     resetQuiz,
-    isCompleted
+    isCompleted,
+    quizPath,
+    setQuizPath
   };
 
   return (

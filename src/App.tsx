@@ -9,6 +9,7 @@ import Header from "@/components/Header";
 import Landing from "./pages/Landing";
 import Quiz from "./pages/Quiz";
 import Solution from "./pages/Solution";
+import Sales from "./pages/Sales";
 import Offer from "./pages/Offer";
 import ThankYou from "./pages/ThankYou";
 import NotFound from "./pages/NotFound";
@@ -29,6 +30,7 @@ const App = () => (
                 <Route path="/" element={<Landing />} />
                 <Route path="/quiz" element={<Quiz />} />
                 <Route path="/solution" element={<Solution />} />
+                <Route path="/sales" element={<Sales />} />
                 <Route path="/offer" element={<Offer />} />
                 <Route path="/thank-you" element={<ThankYou />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
