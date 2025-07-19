@@ -51,7 +51,7 @@ const Sales: React.FC = () => {
                 <p className="text-muted-foreground leading-relaxed mt-4">
                   Nos últimos 4 anos, ajudei negócios de diferentes segmentos a tomar decisões mais inteligentes com base em dados reais.
                 </p>
-                <p className="text-muted-foreground leading-relaxed mt-4">Fui responsável por implementar estruturas completas de tracking, automações, relatórios estratégicos e dashboards que simplificam o acompanhamento de resultados e agilizam seu tempo com tomada de dicisões agéis. </p>
+                <p className="text-muted-foreground leading-relaxed mt-4">Fui responsável por implementar estruturas completas de tracking, automações, relatórios estratégicos e dashboards que simplificam o acompanhamento de resultados e agilizam seu tempo com tomada de dicisões ágeis. </p>
                 <p className="text-muted-foreground leading-relaxed mt-4">
                   Com essa bagagem, criei uma solução prática e definitiva para quem trabalha com anúncios e precisa apresentar resultados de forma clara, visual e profissional.
                 </p>
